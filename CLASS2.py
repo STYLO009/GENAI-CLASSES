@@ -30,23 +30,9 @@ Generate a random person's details from {place}.
 
 # Run
 prompt = template.invoke({'place': 'India'})
-result = llm.invoke(prompt)
+results = llm.invoke(prompt)
 
 # Parse
-content = result.content
-if isinstance(content, list):
-    text_parts = []
-    for item in content:
-        if isinstance(item, str):
-            text_parts.append(item)
-        elif isinstance(item, dict):
-            text_parts.append(str(item.get("text", item)))
-        else:
-            text_parts.append(str(item))
-    content = "".join(text_parts)
-elif not isinstance(content, str):
-    content = str(content)
-
-final_result = parser.parse(content)
+final_result = parser.parse(results.content)
 
 print(final_result)
